@@ -1,0 +1,28 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href = "{% static 'themain/css/style.css'%} ">
+    <title>Linker</title>
+  </head>
+  <body>
+    <div class="header">
+      <h class="some-text">Link saver</h>
+      <button type="button" class="btn">Login</button>
+    </div>
+    <h2>Login/Signup</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+        </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Sign Up</a></p>
+    <a href="{% url 'logout' %}">Logout</a>
+  </body>
+</html>
+
+
+

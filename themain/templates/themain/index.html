@@ -1,0 +1,44 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href = "{% static 'themain/css/style.css'%} ">
+    <title>Linker</title>
+  </head>
+  <body>
+    <div class="header">
+      <h class="some-text">Link saver</h>
+      <button type="button" class="btn" onclick="window.location.href='{% url 'login' %}'">Login/Sign up/Logout</button>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+         <div class="form-group">
+            <input type="text" id="link" name="link" placeholder="Enter the link" class="input-box">
+         </div>
+        <div>
+            <p class="bezdelushka"><strong>Importance</strong></p>
+            <input type="range" min="1" max="5" value="3" class="slider" id="urgency" name="urgency">
+        </div>
+      <button type="submit" class="submit">Submit</button>
+    </form>
+    <div class="container">
+        {% for i in data %}
+            {% for item in i %}
+              <div class="button-pair">
+                <span>{{ item.link }}</span>
+                <form class="delete" method="POST" action="{% url 'delete_link' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="slide-button">Delete</button>
+                </form>
+              </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+  </body>
+</html>
+
+
+
